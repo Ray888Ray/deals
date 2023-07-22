@@ -4,7 +4,6 @@ class Client(models.Model):
     username = models.CharField(max_length=100, unique=True)
 
 class Deal(models.Model):
-    # customer = models.CharField(max_length=100)
     customer = models.ForeignKey(Client, related_name='deals', on_delete=models.CASCADE)
     item = models.CharField(max_length=100)
     total = models.DecimalField(max_digits=10, decimal_places=2)
