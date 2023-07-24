@@ -17,6 +17,10 @@ class DealsUploadView(APIView):
         if not csv_file:
             return Response({'Error': 'No CSV file provided in the request.'}, status=status.HTTP_400_BAD_REQUEST)
 
+        Client.objects.all().delete()
+        Deal.objects.all().delete()
+        Gem.objects.all().delete()
+
         decoded_file = csv_file.read().decode('utf-8')
         reader = csv.reader(decoded_file.splitlines())
         next(reader)
@@ -61,10 +65,3 @@ class TopClientsView(APIView):
             })
 
         return Response({'response': response_data}, status=status.HTTP_200_OK)
-
-
-
-
-
-
-
